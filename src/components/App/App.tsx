@@ -1,11 +1,12 @@
 import { useState } from 'react'
 
 import css from './App.module.css'
-import CareInfo from '../CareInfo/CafeInfo'
+import CafeInfo from '../CafeInfo/CafeInfo'
 import type { Votes } from "../../types/votes"
 import VoteOptions from '../VoteOptions/VoteOptions'
 import VoteStats from '../VoteStats/VoteStats'
 import Notification from '../Notification/Notification'
+import type {VoteType} from "../../types/votes";
 
 
 
@@ -22,7 +23,7 @@ function App() {
     : 0;
 
 
-  function handleVote(key: keyof Votes): void{
+  function handleVote(key: VoteType): void{
     addVote({
       ...votesState,
         [key]: votesState[key] + 1,
@@ -40,7 +41,7 @@ function App() {
 
   return (
     <div className={css.app}>
-      <CareInfo />
+      <CafeInfo />
       <VoteOptions onVote={handleVote} canReset={totalVotes > 0} onReset={resetVotes} />
       {totalVotes ? <VoteStats votes={votesState} totalVotes={totalVotes} positiveRate={positiveRate} /> : <Notification />}
     </div>
